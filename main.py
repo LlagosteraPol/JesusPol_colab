@@ -1,3 +1,5 @@
+import graphToolbox.core.graphtbox as gtb
+
 import os
 import numpy as np
 import networkx as nx
@@ -25,11 +27,29 @@ def read_panel(p):
     return (graph_lst)
 
 
+def tests():
+    #gt = nx.Graph([(0, 1), (0, 2), (0, 3), (2, 1), (3, 2)])
+    gt = nx.MultiDiGraph([(0, 1, None), (0, 2, None), (0, 3, None), (2, 1, None), (3, 2, None)])
+    print(gt.edges())
+    print(gtb.GraphRel.relpoly_binary_basic(gt))
+    print(gtb.GraphRel.relpoly_binary_improved(gt))
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print("Starting...")
-    result = read_panel(3)
 
+    tests()
+    exit()
+
+    graph_lst = read_panel(5)
+    for n_line, element in enumerate(graph_lst, start=1):
+        try:
+            print(element.edges())
+            print("Basic: ", gtb.Utilities.polynomial2binomial(gtb.GraphRel.relpoly_binary_basic(element)))
+            print("Improved: ", gtb.GraphRel.relpoly_binary_improved(element))
+            print("")
+        except:
+            print("Error with graph at line ", n_line)
     print("Done")
 
 
