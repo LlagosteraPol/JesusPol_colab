@@ -7,32 +7,29 @@ import networkx as nx
 
 def read_panel(p):
     """
-    Creates all possible digraphs with the given number of panels.
+    Creates all possible multidigraphs with the given number of panels.
     :param p: number of panels
-    :return: list with all digraphs
+    :return: list with all multidigraphs
     """
-    path = os.getcwd() + "/data/graph6/"
-    f = open(path + '/Xdigraph/' + str(p) + 'digraph.txt', 'r')
+    path = os.getcwd() + "/data/Xdigraph/"
+    f = open(path + str(p) + 'digraph.txt', 'r')
 
-    digraphs = []
-
+    digraphs = list()
     for line in f:
         exec('digraphs+=[' + line + ']')
 
-    graph = []
-
-    for digraph in digraphs:
-        a = nx.MultiDiGraph()
-        a.add_edges_from(digraph)
-        graph += [a]
-
+    graph_lst = list()
+    [graph_lst.append(nx.MultiDiGraph(digraph)) for digraph in digraphs]
     f.close()
 
-    return (graph)
+    return (graph_lst)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print("Hello world")
+    print("Starting...")
+    result = read_panel(3)
+
+    print("Done")
 
 
