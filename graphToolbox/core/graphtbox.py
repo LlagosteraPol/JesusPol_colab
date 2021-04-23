@@ -1641,9 +1641,8 @@ class GraphTools(object):
 
             else:
                 # Differentiate the mixed cycles into ordered or 'others
-                #disconnected_subgraphs = list(nx.connected_component_subgraphs(bi_component)) # deprecated
-                disconnected_subgraphs = list(bi_component.subgraph(c) for c in nx.connected_components(bi_component))
-                tt =  (bi_component.subgraph(c) for c in nx.connected_components(bi_component))
+                disconnected_subgraphs = list(nx.connected_component_subgraphs(bi_component)) # deprecated
+                #disconnected_subgraphs = list(bi_component.subgraph(c) for c in nx.connected_components(bi_component))
 
                 if filter_ordered_cycles:
                     tmp_ordered_cycles, tmp_other_graphs = GraphTools.differentiate_ordered_cycles(
@@ -1665,8 +1664,8 @@ class GraphTools(object):
         g_copy.remove_nodes_from(list(nx.isolates(g_copy)))
 
         # ------------------------------------Categorize the cycles of the main graph---------------------------------
-        # disconnected_subgraphs = nx.connected_component_subgraphs(g_copy) # deprecated
-        disconnected_subgraphs = (g_copy.subgraph(c) for c in nx.connected_components(g_copy)) # (g_copy, True) to copy the graph attributes
+        disconnected_subgraphs = nx.connected_component_subgraphs(g_copy) # deprecated
+        #disconnected_subgraphs = (g_copy.subgraph(c) for c in nx.connected_components(g_copy)) # (g_copy, True) to copy the graph attributes
 
         for component in disconnected_subgraphs:
             sub_cycles = nx.minimum_cycle_basis(nx.Graph(component))
@@ -1677,8 +1676,8 @@ class GraphTools(object):
 
             else:
                 # Differentiate the mixed cycles
-                # disconnected_subgraphs = list(nx.connected_component_subgraphs(component)) # deprecated
-                disconnected_subgraphs = list(component.subgraph(c) for c in nx.connected_components(component))
+                disconnected_subgraphs = list(nx.connected_component_subgraphs(component)) # deprecated
+                #disconnected_subgraphs = list(component.subgraph(c) for c in nx.connected_components(component))
 
                 tmp_ordered_cycles, tmp_other_graphs = GraphTools.differentiate_ordered_cycles(disconnected_subgraphs)
 
