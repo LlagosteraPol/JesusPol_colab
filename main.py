@@ -38,15 +38,12 @@ def tests():
 if __name__ == '__main__':
     print("Starting...")
 
-    tests()
-    exit()
-
     graph_lst = read_panel(5)
     for n_line, element in enumerate(graph_lst, start=1):
         try:
-            print(element.edges())
+            print("Graph edges:", element.edges())
             print("Basic: ", gtb.Utilities.polynomial2binomial(gtb.GraphRel.relpoly_binary_basic(element)))
-            print("Improved: ", gtb.GraphRel.relpoly_binary_improved(element))
+            print("Improved: ", gtb.Utilities.polynomial2binomial(gtb.GraphRel.relpoly_binary_improved(element)))
             print("")
         except:
             print("Error with graph at line ", n_line)
